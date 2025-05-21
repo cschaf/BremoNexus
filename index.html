@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BremoNexus Immobilien | Ihr Makler in Bremen & Umgebung</title>
+    <style>
+        /* Allgemeine Stile & Farbvariablen */
+        :root {
+            /* Light Mode Farben (Standard) */
+            --primary-color: #2e7d32; 
+            --secondary-color: #4caf50; 
+            --text-color: #333;
+            --light-color: #f5f5f5; 
+            --background-color: #fff; 
+            --card-background: #fff; 
+            --box-shadow-color: rgba(0,0,0,0.1);
+            --border-color: #ddd;
+
+            --accent-color: #1b5e20;
+            --footer-bg-main: #4a4a4a; 
+            --footer-bg-sub: #333333;  
+            --footer-text-color: #f0f0f0; 
+            --footer-link-color: #e09650; 
+        }
+
+        body.dark-mode {
+            /* Dark Mode Farben */
+            --primary-color: #66bb6a; 
+            --secondary-color: #81c784;
+            --text-color: #e0e0e0; 
+            --light-color: #3a3a3a; 
+            --background-color: #121212; 
+            --card-background: #1e1e1e; 
+            --box-shadow-color: rgba(255,255,255,0.08);
+            --border-color: #444;
+
+            --accent-color: #a5d6a7;
+            --footer-bg-main: #2c2c2c; 
+            --footer-bg-sub: #1e1e1e;  
+            --footer-text-color: #c7c7c7; 
+            --footer-link-color: #f5b782; 
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial', sans-serif; }
+        body { 
+            color: var(--text-color); 
+            background-color: var(--background-color);
+            line-height: 1.6; 
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 15px; }
+        section { padding: 60px 0; }
+        
+        h1, h2, h3 { margin-bottom: 20px; color: var(--primary-color); }
+        p { margin-bottom: 15px; color: var(--text-color); }
+        .btn { display: inline-block; background: var(--primary-color); color: var(--background-color); padding: 10px 20px; text-decoration: none; border-radius: 4px; transition: background 0.3s; }
+        body.dark-mode .btn { color: var(--text-color); }
+        .btn:hover { background: var(--accent-color); }
+        
+        header { 
+            background-color: var(--card-background); 
+            box-shadow: 0 2px 5px var(--box-shadow-color); 
+            position: fixed; width: 100%; z-index: 1000; 
+            transition: background-color 0.3s;
+        }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; position: relative; }
+        .logo { font-size: 24px; font-weight: bold; color: var(--primary-color); text-decoration: none; }
+        nav ul { display: flex; list-style: none; align-items: center; }
+        nav ul li { margin-left: 30px; }
+        nav ul li a { color: var(--text-color); text-decoration: none; transition: color 0.3s; }
+        nav ul li a:hover { color: var(--primary-color); }
+        
+        .hero { height: 100vh; background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/hero.png') center/cover no-repeat; color: #fff; display: flex; align-items: center; text-align: center; }
+        .hero-content { max-width: 800px; margin: 0 auto; }
+        .hero h1 { font-size: 48px; margin-bottom: 20px; color: #fff; }
+        .hero p { font-size: 20px; margin-bottom: 30px; color: #f0f0f0;}
+        .hero .btn { color: #fff; } 
+        
+        .about { background-color: var(--light-color); transition: background-color 0.3s; }
+        .about-content { display: flex; gap: 50px; align-items: stretch; }
+        .about-image-wrapper { flex: 0 0 40%; max-width: 450px; display: flex; }
+        .about-image-wrapper .about-img { border-radius: 10px; overflow: hidden; width: 100%; display: flex; }
+        .about-image-wrapper .about-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .about-text-content { flex: 1; display: flex; flex-direction: column;}
+        .about-text-content h2 { font-size: 32px; margin-top: 0; }
+        .about-text-content .values { margin-top: 35px; padding-top: 25px; border-top: 1px solid var(--border-color); }
+        .about-text-content .values h3 { font-size: 1.6em; margin-bottom: 25px; text-align: left; }
+        .values-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
+        .value-item { background-color: transparent; padding: 0; text-align: left; display: flex; align-items: flex-start; gap: 15px; }
+        .value-item i { color: var(--primary-color); font-size: 26px; margin-top: 3px; flex-shrink: 0; }
+        .value-item h4 { font-size: 1.1em; margin-bottom: 5px; color: var(--text-color); }
+        .value-item p { font-size: 0.9em; color: var(--text-color); opacity: 0.8; margin-bottom: 0; line-height: 1.5; }
+        
+        .services {}
+        .services-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
+        .service-item { background-color: var(--light-color); padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px var(--box-shadow-color); transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s; }
+        .service-item:hover { transform: translateY(-10px); box-shadow: 0 8px 25px var(--box-shadow-color); opacity: 0.9; }
+        .service-item i.fa-2x { display: block; color: var(--primary-color); margin-bottom: 15px; text-align: center; }
+        .service-item h3 { margin-bottom: 10px; font-size: 1.3em; }
+        .service-item p { font-size: 0.95em; color: var(--text-color); opacity: 0.85; }
+        
+        .properties { background-color: var(--light-color); transition: background-color 0.3s;}
+        .properties-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
+        .property-item { background-color: var(--card-background); border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px var(--box-shadow-color); display: flex; flex-direction: column; transition: box-shadow 0.3s, background-color 0.3s; }
+        .property-item:hover { box-shadow: 0 8px 25px var(--box-shadow-color); }
+        .property-img { height: 200px; background-size: cover; background-position: center; background-repeat: no-repeat; }
+        .property-content { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
+        .property-content h3 { font-size: 1.2em; margin-bottom: 10px;}
+        .property-content > .btn { margin-top: auto; align-self: flex-start; }
+        .property-price { color: var(--primary-color); font-weight: bold; font-size: 1.25em; margin-bottom: 10px; }
+        .property-features { display: flex; flex-wrap: wrap; gap: 15px; margin: 15px 0; font-size: 0.9em; color: var(--text-color); opacity: 0.8; }
+        .property-feature { display: flex; align-items: center; gap: 8px; }
+        .property-feature i { color: var(--secondary-color); }
+        
+        .contact {}
+        .contact-content { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: flex-start;}
+        .contact-info { margin-bottom: 30px; }
+        .contact-info-item { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+        .contact-info-item i { color: var(--primary-color); font-size: 22px; width: 25px; text-align: center;}
+        .contact-info-item div h4 { font-size: 1.1em; margin-bottom: 3px; }
+        .contact-info-item div p { margin-bottom: 0; color: var(--text-color); opacity:0.8; }
+        .social-links { margin-top:30px; }
+        .social-links a { color: var(--primary-color); margin-right: 15px; font-size: 28px; transition: color 0.3s; }
+        .social-links a:hover { color: var(--accent-color); }
+        .contact-form .form-group { margin-bottom: 20px; }
+        .contact-form label { display: block; margin-bottom: 8px; font-weight: bold; font-size:0.95em; }
+        .contact-form input, .contact-form textarea { width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 4px; font-size: 1em; background-color: var(--card-background); color: var(--text-color); transition: border-color 0.3s, background-color 0.3s, color 0.3s; }
+        .contact-form input:focus, .contact-form textarea:focus { border-color: var(--primary-color); box-shadow: 0 0 0 0.2rem rgba(46, 125, 50, 0.25); outline: none;}
+        .contact-form textarea { height: 150px; resize: vertical; }
+        
+        /* FOOTER STYLES */
+        .site-footer { background-color: var(--footer-bg-main); color: var(--footer-text-color); padding-top: 50px; transition: background-color 0.3s, color 0.3s;}
+        .footer-main-content { display: flex; flex-wrap: wrap; gap: 30px; padding-bottom: 40px; }
+        .footer-column { flex: 1; min-width: 220px; }
+        .footer-column h4 { font-size: 1.1em; margin-bottom: 15px; color: #fff; font-weight: bold; }
+        .footer-column p, .footer-column ul li span { font-size: 0.9em; margin-bottom: 8px; color: var(--footer-text-color); }
+        .footer-column ul { list-style: none; padding-left: 0; }
+        .footer-logo-text { font-size: 1.5em; font-weight: bold; color: #fff; margin-bottom: 5px; }
+        .footer-tagline { font-size: 0.9em; color: var(--footer-text-color); opacity: 0.8; }
+        .footer-contact-item { display: flex; align-items: center; margin-bottom: 10px; }
+        .footer-contact-item i { margin-right: 10px; font-size: 1.1em; color: var(--footer-text-color);}
+        .partner-placeholder { height: 50px; background-color: #666; color: #ccc; display: flex; align-items: center; justify-content: center; border-radius: 3px; font-size: 0.9em; margin-bottom: 10px; }
+        body.dark-mode .partner-placeholder { background-color: #4f4f4f; color: #aaa;}
+
+        .footer-sub { background-color: var(--footer-bg-sub); padding: 20px 0; border-top: 1px solid var(--border-color); transition: background-color 0.3s, border-color 0.3s;}
+        .footer-sub .container.sub-footer-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; font-size: 0.85em; margin-bottom: 20px; }
+        .footer-sub-links a { color: var(--footer-link-color); text-decoration: none; margin-left: 15px; }
+        .footer-sub-links a:hover { text-decoration: underline; }
+        .copyright-text { color: var(--footer-text-color); opacity: 0.8;}
+        .copyright-text a { color: var(--footer-link-color); text-decoration: none; }
+        .copyright-text a:hover { text-decoration: underline; }
+        .accordion-wrapper { }
+        .accordion-container { max-width: 100%; margin: 0 auto; text-align: left; background-color: rgba(0,0,0,0.15); border-radius: 5px; }
+        body.dark-mode .accordion-container { background-color: rgba(255,255,255,0.05); }
+        .accordion-item { border-bottom: 1px solid rgba(255,255,255,0.1); }
+        body.dark-mode .accordion-item { border-bottom: 1px solid rgba(255,255,255,0.08); }
+        .accordion-item:last-child { border-bottom: none; }
+        .accordion-toggle { display: block; padding: 12px 15px; color: var(--footer-link-color); font-weight: normal; text-decoration: none; position: relative; font-size: 0.9em; }
+        .accordion-toggle::after { content: '\25BC'; font-size: 0.8em; position: absolute; right: 15px; transition: transform 0.3s ease; color: var(--footer-text-color); }
+        .accordion-toggle.active::after { transform: rotate(180deg); }
+        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-out, padding-top 0.3s ease, padding-bottom 0.3s ease; padding: 0 15px; color: var(--footer-text-color); }
+        .accordion-content.active { padding-top: 15px; padding-bottom: 15px; }
+        .accordion-content h3, .accordion-content h4 { font-size: 1em; color: #fff; margin-top: 10px; margin-bottom: 8px; }
+        .accordion-content p, .accordion-content ul { margin-bottom: 8px; font-size: 0.8em; opacity:0.9; }
+        .accordion-content ul { list-style-type: disc; margin-left: 20px; }
+        .accordion-content strong { color: #fff; }
+        .accordion-content em { color: #f0ad4e; }
+        body.dark-mode .accordion-content strong { color: var(--footer-text-color); }
+        body.dark-mode .accordion-content em { color: var(--footer-link-color); }
+
+        .dark-mode-toggle { background: var(--primary-color); color: var(--background-color); border: none; padding: 8px 12px; font-size: 1.2em; border-radius: 50%; cursor: pointer; transition: background-color 0.3s, color 0.3s; line-height: 1; }
+        .dark-mode-toggle:hover { background: var(--accent-color); }
+        nav ul { align-items: center; }
+
+        #scrollTopBtn { display: none; position: fixed; bottom: 30px; right: 30px; z-index: 999; border: none; outline: none; background-color: var(--primary-color); color: white; cursor: pointer; padding: 12px 15px; border-radius: 50%; font-size: 18px; box-shadow: 0 4px 8px var(--box-shadow-color); transition: background-color 0.3s, opacity 0.3s; opacity: 0;}
+        #scrollTopBtn:hover { background-color: var(--accent-color); }
+        body.dark-mode #scrollTopBtn { color: var(--background-color); }
+
+        .menu-toggle { 
+            display: none; 
+            cursor: pointer; 
+            font-size: 24px; 
+        }
+
+        /* Media Queries */
+        @media (max-width: 992px) { 
+            .about-content { flex-direction: column; align-items: center; text-align: center; }
+            .about-image-wrapper { flex-basis: auto; width: 70%; max-width: 400px; margin-bottom: 40px; }
+            .about-image-wrapper .about-img img { height: auto; object-fit: contain; }
+            .about-text-content { width: 100%; }
+            .about-text-content .values h3 { text-align: center; }
+            .values-list { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+            .contact-content { grid-template-columns: 1fr; } 
+        }
+        @media (max-width: 768px) { 
+             .hero h1 { font-size: 36px; }
+            nav { flex-direction: column; } 
+            .logo { margin-bottom: 10px;} 
+            nav ul { 
+                display: none; 
+                flex-direction: column; 
+                width: 100%; 
+                background-color: var(--card-background); 
+                padding: 15px 0; 
+                position: absolute; 
+                top: 60px; /* Passen Sie dies an die tatsächliche Höhe des Header-Bereichs über dem Menü an */
+                left:0; 
+                box-shadow: 0 2px 5px var(--box-shadow-color); 
+            }
+            nav ul.active { display: flex; } 
+            nav ul li { margin: 10px 15px; width: 100%; text-align: center; margin-left: 0;} 
+            .dark-mode-toggle { margin-left: 0; margin-top:10px;} 
+
+            .menu-toggle { 
+                display: block; 
+                position: absolute; 
+                top: 50%; 
+                right: 15px; 
+                transform: translateY(-50%);
+                color: var(--text-color);
+            }
+            
+            .footer-main-content { flex-direction: column; align-items: flex-start; }
+            .footer-column { width: 100%; margin-bottom: 20px; }
+            .footer-sub .container.sub-footer-top { flex-direction: column; gap: 10px; }
+            .footer-sub-links { text-align: center; width: 100%; }
+            .footer-sub-links a { margin: 0 8px; }
+        }
+        @media (max-width: 480px) { 
+             .about-text-content h2 { font-size: 28px; } 
+             .hero h1 { font-size: 32px; }
+             .hero p { font-size: 18px; }
+             .values-list { grid-template-columns: 1fr; }
+             .value-item { gap: 12px; }
+             .dark-mode-toggle { padding: 6px 10px; font-size: 1em;}
+        }
+        html { scroll-behavior: smooth; }
+        
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+         <div class="container">
+            <nav>
+                <a href="#home" class="logo">BremoNexus Immobilien</a>
+                <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+                <ul>
+                    <li><a href="#about">Über Uns</a></li>
+                    <li><a href="#services">Leistungen</a></li>
+                    <li><a href="#properties">Immobilien</a></li>
+                    <li><a href="#contact">Kontakt</a></li>
+                    <li>
+                        <button id="darkModeToggle" class="dark-mode-toggle" aria-label="Dark Mode umschalten">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>BremoNexus Immobilien: Ihr Partner für Immobilien in Bremen und Umgebung</h1>
+                <p>Mit Leidenschaft, Kompetenz und persönlichem Service begleiten wir Sie auf dem Weg zu Ihrem Traumobjekt oder dem erfolgreichen Verkauf Ihrer Immobilie.</p>
+                <a href="#contact" class="btn">Kontakt aufnehmen</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-image-wrapper">
+                    <div class="about-img">
+                        <img src="images/about.png" alt="Peter Lustig - BremoNexus Immobilien">
+                    </div>
+                </div>
+                <div class="about-text-content">
+                    <h2>Peter Lustig – Ihr Gesicht hinter BremoNexus Immobilien</h2>
+                    <p>Herzlich willkommen bei BremoNexus Immobilien! Mein Name ist Peter Lustig, und seit dem 1. Mai 2025 bin ich als Gründer und Ihr engagierter Immobilienmakler in Bremen und Umgebung tätig. Nach knapp 20 Jahren Erfahrung im familiär geführten Gastronomieunternehmen habe ich den Absprung gewagt, um meiner wahren Leidenschaft zu folgen: dem Immobiliengeschäft.</p>
+                    <p>Mit meinem IHK-Zertifikat und der Erlaubnis nach §34c der GewO bringe ich nicht nur die nötige Fachkompetenz mit, sondern auch eigene Erfahrung als Immobilienbesitzer. Mein Ziel ist es, jeden Kunden individuell zu betreuen und für seine Bedürfnisse die perfekte Lösung zu finden – getreu dem Motto von BremoNexus Immobilien: Bremische Verbindungen schaffen, Werte realisieren.</p>
+                    <p>Ich setze auf Qualität statt Quantität. Lieber weniger Aufträge, aber diese dafür mit höchster Sorgfalt und persönlichem Engagement zu betreuen, ist meine Devise. Von der ersten Besichtigung bis hin zum Notartermin – ich bin Ihr alleiniger Ansprechpartner und kümmere mich um jedes Detail.</p>
+                    
+                     <div class="values">
+                        <h3>Meine Philosophie – Ihre Vorteile</h3>
+                        <div class="values-list">
+                            <div class="value-item">
+                                <i class="fas fa-balance-scale"></i>
+                                <div><h4>Ehrlichkeit & Transparenz</h4><p>Absolute Aufrichtigkeit und klare Kommunikation in jeder Phase unserer Zusammenarbeit.</p></div>
+                            </div>
+                            <div class="value-item">
+                                <i class="fas fa-hands-helping"></i>
+                                <div><h4>Empathie & Menschlichkeit</h4><p>Ich höre Ihnen zu, verstehe Ihre Bedürfnisse und stelle den persönlichen Kontakt in den Mittelpunkt.</p></div>
+                            </div>
+                            <div class="value-item">
+                                <i class="fas fa-shield-alt"></i>
+                                <div><h4>Zuverlässigkeit & Sorgfalt</h4><p>Auf mein Wort können Sie sich verlassen. Jedes Detail wird mit größter Sorgfalt behandelt.</p></div>
+                            </div>
+                            <div class="value-item">
+                                <i class="fas fa-fire"></i>
+                                <div><h4>Leidenschaft für Immobilien</h4><p>Immobilien sind für mich mehr als nur ein Geschäft – sie sind meine Passion.</p></div>
+                            </div>
+                            <div class="value-item">
+                                <i class="fas fa-star"></i>
+                                <div><h4>Wertschätzung & Qualität</h4><p>Jedes Objekt wird individuell wertgeschätzt. Ich setze auf Qualität vor Quantität.</p></div>
+                            </div>
+                             <div class="value-item">
+                                <i class="fas fa-handshake"></i>
+                                <div><h4>Fairness & Partnerschaft</h4><p>Ein fairer Umgang mit Käufern und Verkäufern ist für mich selbstverständlich.</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services" id="services">
+         <div class="container">
+            <h2>Unsere Leistungen für Sie</h2>
+            <p>BremoNexus Immobilien bietet Ihnen ein umfassendes Dienstleistungspaket rund um Ihre Immobilie. Von der ersten Beratung bis zum erfolgreichen Abschluss – und darüber hinaus – bin ich für Sie da. Mein Ziel ist es, Ihnen den Prozess des Immobilien(ver)kaufs so angenehm und erfolgreich wie möglich zu gestalten.</p>
+             <div class="services-list">
+                <div class="service-item">
+                    <i class="fas fa-home fa-2x"></i>
+                    <h3>Immobilienverkauf</h3>
+                    <p>Professionelle Vermarktung Ihrer Immobilie mit einer individuellen Strategie und einem transparenten Prozess. Von der fundierten Wertermittlung über die Erstellung hochwertiger Exposés bis zu den Besichtigungen und dem Notartermin – alles aus einer Hand.</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-key fa-2x"></i>
+                    <h3>Immobilienvermietung</h3>
+                    <p>Zuverlässige Vermittlung zwischen Vermietern und Mietern. Ich übernehme die Suche nach solventen, passenden Mietern, führe Besichtigungen durch und unterstütze bei der rechtssicheren Vertragsgestaltung.</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-chart-line fa-2x"></i>
+                    <h3>Immobilienbewertung</h3>
+                    <p>Fundierte und marktgerechte Wertermittlung Ihrer Immobilie. Durch Nutzung moderner Tools zur Preisermittlung und mein umfassendes Marktverständnis für Bremen und Umgebung erhalten Sie eine realistische Einschätzung.</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-video fa-2x"></i>
+                    <h3>360° Rundgänge & Drohnenaufnahmen</h3>
+                    <p>Moderne Präsentationstechniken wie virtuelle 360°-Rundgänge und professionelle Drohnenaufnahmen ermöglichen potenziellen Käufern einen realistischen und umfassenden ersten Eindruck Ihrer Immobilie – jederzeit und von überall.</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-camera fa-2x"></i>
+                    <h3>Professionelle Fotografie & Videografie</h3>
+                    <p>Hochwertige Bilder und emotionale Kurzfilme oder Videos präsentieren Ihre Immobilie von ihrer besten Seite. Kreative Vermarktung, die das Interesse potenzieller Käufer weckt und Emotionen anspricht.</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-couch fa-2x"></i>
+                    <h3>Home Staging & After Sales Services</h3>
+                    <p>Optimale Präsentation Ihrer Immobilie durch professionelles Home Staging, um den bestmöglichen Verkaufspreis zu erzielen. Auch nach dem Verkauf unterstütze ich Sie gerne mit meinen After Sales Services, z.B. bei der Organisation des Umzugs oder der Vermittlung von Handwerksdienstleistungen.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="properties" id="properties">
+        <div class="container">
+            <h2>Aktuelle Immobilienangebote</h2>
+            <p>Entdecken Sie meine aktuellen Angebote in Bremen und Umgebung. Hier finden Sie eine Auswahl hochwertiger Immobilien für verschiedene Bedürfnisse – ob Eigentumswohnung, Einfamilienhaus oder Gewerbeimmobilie. Jedes Objekt wird mit Sorgfalt ausgewählt und präsentiert.</p>
+            <div class="properties-list">
+                <div class="property-item">
+                    <div class="property-img" style="background-image: url('images/001_property.png');"></div>
+                    <div class="property-content">
+                        <h3>Moderne Eigentumswohnung in Findorff</h3>
+                        <div class="property-price">320.000 €</div>
+                        <p>Diese helle und hochwertig renovierte 3-Zimmer-Wohnung befindet sich in einer begehrten Lage in Bremen-Findorff...</p>
+                        <div class="property-features">
+                            <div class="property-feature"><i class="fas fa-ruler-combined"></i> <span>85 m²</span></div>
+                            <div class="property-feature"><i class="fas fa-bed"></i> <span>3 Zimmer</span></div>
+                            <div class="property-feature"><i class="fas fa-calendar"></i> <span>Bj. 2010</span></div>
+                        </div>
+                        <a href="#contact" class="btn">Anfragen</a>
+                    </div>
+                </div>
+                <div class="property-item">
+                    <div class="property-img" style="background-image: url('images/002_property.png');"></div>
+                    <div class="property-content">
+                        <h3>Einfamilienhaus in Oberneuland mit Garten</h3>
+                        <div class="property-price">650.000 €</div>
+                        <p>Ein Traum für Familien: Dieses gepflegte Einfamilienhaus liegt im grünen und ruhigen Stadtteil Oberneuland...</p>
+                        <div class="property-features">
+                            <div class="property-feature"><i class="fas fa-ruler-combined"></i> <span>160 m²</span></div>
+                            <div class="property-feature"><i class="fas fa-bed"></i> <span>5 Zimmer</span></div>
+                            <div class="property-feature"><i class="fas fa-calendar"></i> <span>Bj. 1998</span></div>
+                        </div>
+                        <a href="#contact" class="btn">Anfragen</a>
+                    </div>
+                </div>
+                <div class="property-item">
+                    <div class="property-img" style="background-image: url('images/003_property.png');"></div>
+                    <div class="property-content">
+                        <h3>Repräsentative Bürofläche in der Innenstadt</h3>
+                        <div class="property-price">12 €/m² zzgl. NK</div>
+                        <p>Moderne und flexible Bürofläche in zentraler Bremer Innenstadtlage. Die Auswahl der Räume ist groß...</p>
+                        <div class="property-features">
+                            <div class="property-feature"><i class="fas fa-ruler-combined"></i> <span>200 m²</span></div>
+                            <div class="property-feature"><i class="fas fa-door-open"></i> <span>6 Räume</span></div>
+                            <div class="property-feature"><i class="fas fa-calendar"></i> <span>Bj. 2015</span></div>
+                        </div>
+                        <a href="#contact" class="btn">Anfragen</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+         <div class="container">
+            <h2>Nehmen Sie Kontakt auf</h2>
+            <p>Sie haben Fragen zu meinen Dienstleistungen, interessieren sich für eines meiner Immobilienangebote oder möchten Ihre eigene Immobilie bewerten und verkaufen lassen? Ich freue mich auf Ihre Nachricht oder Ihren Anruf! Gerne vereinbare ich ein persönliches und unverbindliches Beratungsgespräch mit Ihnen.</p>
+            <div class="contact-content">
+                <div>
+                    <div class="contact-info">
+                        <div class="contact-info-item"><i class="fas fa-map-marker-alt"></i><div><h4>Adresse</h4><p>BremoNexus Immobilien<br>[Musterstraße 123, 28195 Bremen]</p></div></div>
+                        <div class="contact-info-item"><i class="fas fa-phone"></i><div><h4>Telefon</h4><p>[+49 (0) 421 12345678]</p></div></div>
+                        <div class="contact-info-item"><i class="fas fa-envelope"></i><div><h4>E-Mail</h4><p>[info@bremonexus-immobilien.de]</p></div></div>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group"><label for="name">Name</label><input type="text" id="name" name="name" required></div>
+                        <div class="form-group"><label for="email">E-Mail</label><input type="email" id="email" name="email" required></div>
+                        <div class="form-group"><label for="phone">Telefon (optional)</label><input type="tel" id="phone" name="phone"></div>
+                        <div class="form-group"><label for="subject">Betreff (optional)</label><input type="text" id="subject" name="subject"></div>
+                        <div class="form-group"><label for="message">Ihre Nachricht</label><textarea id="message" name="message" rows="5" required></textarea></div>
+                        <button type="submit" class="btn">Nachricht senden</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container footer-main-content">
+            <div class="footer-column">
+                <div class="footer-logo-text">BremoNexus</div>
+                <p class="footer-tagline">IHR PROFI FÜR IMMOBILIEN</p>
+            </div>
+            <div class="footer-column">
+                <h4>Adresse</h4>
+                <p>BremoNexus Immobilien</p>
+                <p>[Musterstraße 4]</p>
+                <p>[28327 Bremen]</p>
+            </div>
+            <div class="footer-column">
+                <h4>Kontakt</h4>
+                <ul>
+                    <li class="footer-contact-item"><i class="fas fa-phone"></i><span>[0421 123 456 78]</span></li>
+                    <li class="footer-contact-item"><i class="fas fa-envelope"></i><span>[info@bremonexus-immobilien.de]</span></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Partner</h4>
+                <div class="partner-placeholder">Partner Logo 1</div>
+                <div class="partner-placeholder">Partner Logo 2</div>
+                <div class="partner-placeholder">Partner Logo 3</div>
+                <p style="font-size:0.8em; margin-top:5px;">Die Partner für Ihre Finanzen.</p>
+            </div>
+        </div>
+        <div class="footer-sub">
+            <div class="container sub-footer-top">
+                <p class="copyright-text">Copyright © 2025 All rights reserved <a href="#">BremoNexus Immobilien</a></p>
+                <div class="footer-sub-links">
+                    <a href="#home">Home</a>
+                    <a href="#about">Über uns</a>
+                    <a href="#contact">Kontakt</a>
+                    <a href="javascript:void(0);" onclick="toggleAccordion('datenschutz-toggle-footer', 'datenschutz-content-footer');">Datenschutz</a>
+                    <a href="javascript:void(0);" onclick="toggleAccordion('impressum-toggle-footer', 'impressum-content-footer');">Impressum</a>
+                </div>
+            </div>
+            <div class="container accordion-wrapper"> 
+                <div class="accordion-container">
+                    <div class="accordion-item">
+                        <a href="javascript:void(0);" class="accordion-toggle" id="impressum-toggle-footer">Impressum</a>
+                        <div class="accordion-content" id="impressum-content-footer">
+                            <h3>Impressum</h3>
+                            <p><strong>Angaben gemäß § 5 TMG:</strong> BremoNexus Immobilien, Inhaber: Peter Lustig, [Musterstraße 123], [28195 Bremen] <strong style="color:red;"><-- ADRESSE ERSETZEN!</strong></p>
+                            <h4>Kontakt:</h4> <p>Tel: [+49042112345678], E-Mail: [info@bremonexus-immobilien.de] <strong style="color:red;"><-- DATEN ERSETZEN!</strong></p>
+                            <p><em>... Vollständiger Impressumstext ...</em></p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                         <a href="javascript:void(0);" class="accordion-toggle" id="datenschutz-toggle-footer">Datenschutzerklärung</a>
+                        <div class="accordion-content" id="datenschutz-content-footer">
+                            <h3>Datenschutzerklärung</h3>
+                            <p>Stand: [Datum] <strong style="color:red;"><-- AKTUALISIEREN!</strong></p>
+                            <p><em>... Vollständiger Datenschutztext ...</em></p>
+                        </div>
+                    </div>
+                     <div class="accordion-item">
+                        <a href="javascript:void(0);" class="accordion-toggle" id="agb-toggle-footer">AGB (Muster)</a>
+                        <div class="accordion-content" id="agb-content-footer">
+                            <h3>Allgemeine Geschäftsbedingungen (AGB) - MUSTER</h3>
+                            <p><strong style="color:red;">WICHTIGER HINWEIS: ...</strong></p>
+                             <p><em>... Vollständiges AGB-Muster ...</em></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <button id="scrollTopBtn" title="Nach oben scrollen"><i class="fas fa-arrow-up"></i></button>
+
+    <script>
+        // JavaScript-Code wie in der vorherigen korrekten Version
+        document.addEventListener('DOMContentLoaded', function() {
+            const body = document.body;
+            const darkModeToggle = document.getElementById('darkModeToggle');
+            const toggleIcon = darkModeToggle.querySelector('i');
+            const scrollTopBtn = document.getElementById('scrollTopBtn');
+
+            function enableDarkMode() {
+                body.classList.add('dark-mode');
+                localStorage.setItem('darkMode', 'enabled');
+                toggleIcon.classList.remove('fa-moon');
+                toggleIcon.classList.add('fa-sun');
+            }
+
+            function disableDarkMode() {
+                body.classList.remove('dark-mode');
+                localStorage.setItem('darkMode', 'disabled');
+                toggleIcon.classList.remove('fa-sun');
+                toggleIcon.classList.add('fa-moon');
+            }
+
+            if (localStorage.getItem('darkMode') === 'enabled') {
+                enableDarkMode();
+            }
+
+            darkModeToggle.addEventListener('click', () => {
+                if (body.classList.contains('dark-mode')) {
+                    disableDarkMode();
+                } else {
+                    enableDarkMode();
+                }
+            });
+
+            window.onscroll = function() {
+                if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                    scrollTopBtn.style.display = "block";
+                    void scrollTopBtn.offsetWidth; 
+                    scrollTopBtn.style.opacity = "1";
+                } else {
+                    scrollTopBtn.style.opacity = "0";
+                    setTimeout(() => { 
+                        if (!(document.body.scrollTop > 100 || document.documentElement.scrollTop > 100)) {
+                           scrollTopBtn.style.display = "none";
+                        }
+                    }, 300); 
+                }
+            };
+
+            scrollTopBtn.addEventListener('click', () => {
+                window.scrollTo({top: 0, behavior: 'smooth'});
+            });
+
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navList = document.querySelector('nav ul');
+            
+            if (menuToggle && navList) {
+                menuToggle.addEventListener('click', function() {
+                    navList.classList.toggle('active');
+                });
+            }
+            
+            const navLinks = document.querySelectorAll('nav ul li a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (link.getAttribute('href').startsWith('#')) {
+                        if (navList && navList.classList.contains('active')) {
+                            navList.classList.remove('active');
+                        }
+                    }
+                });
+            });
+            
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Vielen Dank für Ihre Nachricht! Ihr Anliegen wurde an BremoNexus Immobilien übermittelt. Ich werde mich schnellstmöglich bei Ihnen melden.');
+                    contactForm.reset();
+                });
+            }
+
+            window.toggleAccordion = function(toggleId, contentId) {
+                const toggle = document.getElementById(toggleId);
+                const content = document.getElementById(contentId);
+
+                if (!toggle || !content) return;
+                
+                const parentContainer = toggle.closest('.accordion-container');
+                if (parentContainer) {
+                    parentContainer.querySelectorAll('.accordion-toggle.active').forEach(otherToggle => {
+                        if (otherToggle.id !== toggleId) {
+                            otherToggle.classList.remove('active');
+                            const otherContentId = otherToggle.id.replace('-toggle-footer', '-content-footer');
+                            const otherContent = document.getElementById(otherContentId);
+                            if (otherContent) {
+                                otherContent.classList.remove('active');
+                                otherContent.style.maxHeight = null;
+                                otherContent.style.paddingTop = "0";
+                                otherContent.style.paddingBottom = "0";
+                            }
+                        }
+                    });
+                }
+                
+                toggle.classList.toggle('active');
+                content.classList.toggle('active');
+                
+                if (content.classList.contains('active')) {
+                    content.style.paddingTop = "15px"; 
+                    content.style.paddingBottom = "15px";
+                    content.style.maxHeight = content.scrollHeight + "px"; 
+                } else {
+                    content.style.maxHeight = null; 
+                     setTimeout(() => {
+                        if (!content.classList.contains('active')) { 
+                           content.style.paddingTop = "0";
+                           content.style.paddingBottom = "0";
+                        }
+                    }, 300);
+                }
+                
+                if (toggle.classList.contains('active')) {
+                     setTimeout(() => { 
+                        const headerOffset = document.querySelector('header') ? document.querySelector('header').offsetHeight : 0;
+                        const elementPosition = toggle.getBoundingClientRect().top + window.pageYOffset;
+                        const offsetPosition = elementPosition - headerOffset - 20;
+
+                        window.scrollTo({
+                             top: offsetPosition,
+                             behavior: 'smooth'
+                        });
+                    }, 310);
+                }
+            }
+
+            document.querySelectorAll('.accordion-toggle').forEach(toggle => {
+                toggle.addEventListener('click', function(event) {
+                    event.preventDefault(); 
+                    const contentId = this.id.replace('-toggle-footer', '-content-footer');
+                    window.toggleAccordion(this.id, contentId);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
