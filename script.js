@@ -1,5 +1,15 @@
+// Login check
+if (sessionStorage.getItem('isLoggedIn') !== 'true') {
+    window.location.href = 'login.html';
+}
+
 // JavaScript-Code wie in der vorherigen korrekten Version
 document.addEventListener('DOMContentLoaded', function() {
+    const mainContent = document.getElementById('mainPageContent');
+    if (mainContent) {
+        mainContent.style.display = 'block';
+    }
+
     const body = document.body;
     const darkModeToggle = document.getElementById('darkModeToggle');
     const toggleIcon = darkModeToggle.querySelector('i');
