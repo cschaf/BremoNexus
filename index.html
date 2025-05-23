@@ -11,12 +11,15 @@
 <div id="mainPageContent" style="display: none;">
     <div class="education-badge" id="educationBadge">
         <span>Educational Purpose Only</span>
-        <button class="close-education-badge" id="closeEducationBadge" aria-label="Close_Badge">&times;</button>
+        <button class="close-education-badge" id="closeEducationBadge" aria-label="Close_Badge">×</button>
     </div>
     <header>
          <div class="container">
             <nav>
-                <a href="#home" class="logo">BremoNexus Immobilien</a>
+                <a href="#home" class="logo-link"> 
+                    <img src="images/logo.svg" alt="BremoNexus Immobilien Logo" class="logo-svg">
+                    <span class="logo-text-span">BremoNexus Immobilien</span>
+                </a>
                 <div class="menu-toggle"><i class="fas fa-bars"></i></div>
                 <ul>
                     <li><a href="#about">Über Uns</a></li>
@@ -189,7 +192,11 @@
     <footer class="site-footer">
         <div class="container footer-main-content">
             <div class="footer-column">
-                <div class="footer-logo-text">BremoNexus</div>
+                 <a href="#home" class="footer-logo-link">
+                    <img src="images/logo.svg" alt="BremoNexus Immobilien Logo Footer" class="footer-logo-svg">
+                    <!-- Optional: Text neben dem Footer-Logo, falls gewünscht -->
+                    <!-- <span class="footer-logo-text-span">BremoNexus</span> -->
+                </a>
                 <p class="footer-tagline">IHR PROFI FÜR IMMOBILIEN</p>
             </div>
             <div class="footer-column">
@@ -230,8 +237,6 @@
                         <div class="accordion-content" id="impressum-content-footer">
                             <h3>Impressum</h3>
                             <p>Coming Soon...</p>
-                            <br>
-                            <br>
                         </div>
                     </div>
                     <div class="accordion-item">
@@ -239,8 +244,6 @@
                         <div class="accordion-content" id="datenschutz-content-footer">
                             <h3>Datenschutzerklärung</h3>
                             <p>Coming Soon...</p>
-                            <br>
-                            <br>
                         </div>
                     </div>
                      <div class="accordion-item">
@@ -248,8 +251,6 @@
                         <div class="accordion-content" id="agb-content-footer">
                             <h3>Allgemeine Geschäftsbedingungen (AGB)</h3>
                             <p>Coming Soon...</p>
-                            <br>
-                            <br>
                         </div>
                     </div>
                 </div>
@@ -259,15 +260,14 @@
 
     <button id="scrollTopBtn" title="Nach oben scrollen"><i class="fas fa-arrow-up"></i></button>
 
-    <!-- Mobile CTA Bar HTML -->
     <div class="mobile-cta-bar" id="mobileCtaBar">
         <div class="cta-buttons">
             <a href="tel:+4942112345678" class="cta-btn cta-call"><i class="fas fa-phone-alt"></i> Anrufen</a>
             <a href="mailto:info@bremonexus-immobilien.de" class="cta-btn cta-email"><i class="fas fa-envelope"></i> E-Mail</a>
         </div>
-        <button class="close-cta-bar" id="closeCtaBar" aria-label="Schließen">&times;</button>
+        <button class="close-cta-bar" id="closeCtaBar" aria-label="Schließen">×</button>
     </div>
-</div> <!-- Closing mainPageContent div -->
+</div> 
 
     <script src="properties.js"></script>
     <script src="script.js"></script>
