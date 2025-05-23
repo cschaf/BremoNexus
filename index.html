@@ -190,16 +190,34 @@
         /* Education Badge Styles */
         .education-badge {
             position: fixed;
-            top: 10px;
-            right: 10px;
-            background-color: #f0ad4e; /* Warning-like color */
+            top: 15px; 
+            right: 15px; 
+            background-color: #f0ad4e; 
             color: #fff;
-            padding: 5px 10px;
+            padding: 5px 8px 5px 10px; /* Fine-tuned padding */
             font-size: 10px;
             border-radius: 3px;
-            z-index: 2000; /* High z-index */
-            text-align: center;
+            z-index: 2000; 
             box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+        }
+
+        .close-education-badge {
+            background: none;
+            border: none;
+            color: inherit; 
+            font-size: 14px; 
+            font-weight: bold;
+            cursor: pointer;
+            padding: 0 5px 0 5px; /* Fine-tuned padding */
+            line-height: 1; 
+            margin-left: 5px; /* Fine-tuned margin */
+        }
+
+        .close-education-badge:hover {
+            opacity: 0.7; 
         }
 
         /* Media Queries */
@@ -305,8 +323,8 @@
         }
         @media (max-width: 480px) { 
             .education-badge { /* Adjust badge for very small screens */
-                top: 5px;
-                left: 5px; /* Changed from right to left */
+                top: 10px; /* Increased from 5px */
+                left: 10px; /* Increased from 5px */
                 font-size: 9px;
                 padding: 4px 8px;
             }
@@ -430,7 +448,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <div class="education-badge">Educational Purpose Only</div>
+    <div class="education-badge" id="educationBadge">
+        <span>Educational Purpose Only</span>
+        <button class="close-education-badge" id="closeEducationBadge" aria-label="Close_Badge">&times;</button>
+    </div>
     <header>
          <div class="container">
             <nav>
@@ -907,6 +928,24 @@
                 clearTimeout(resizeTimeout);
                 resizeTimeout = setTimeout(showCtaBar, 250); // Adjust timeout as needed
             });
+
+            // Education Badge Dismiss Logic
+            const educationBadge = document.getElementById('educationBadge');
+            const closeEducationBadgeButton = document.getElementById('closeEducationBadge');
+            const educationBadgeClosedKey = 'educationBadgeClosed_v1'; // Added a version
+
+            if (educationBadge && closeEducationBadgeButton) {
+                // Check on page load if badge was previously closed
+                if (sessionStorage.getItem(educationBadgeClosedKey) === 'true') {
+                    educationBadge.style.display = 'none';
+                }
+
+                // Event listener for the close button
+                closeEducationBadgeButton.addEventListener('click', function() {
+                    educationBadge.style.display = 'none';
+                    sessionStorage.setItem(educationBadgeClosedKey, 'true');
+                });
+            }
         });
     </script>
 </body>
