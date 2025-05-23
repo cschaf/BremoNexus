@@ -98,7 +98,7 @@ nav ul li a:hover { color: var(--primary-color); }
 }
 
 .properties { background-color: var(--light-color); transition: background-color 0.3s;}
-.properties-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
+.properties-list { display: flex; flex-direction: column; gap: 30px; margin-top: 40px; }
 .property-item { background-color: var(--card-background); border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px var(--box-shadow-color); display: flex; flex-direction: column; transition: box-shadow 0.3s, background-color 0.3s; }
 .property-item:hover { box-shadow: 0 8px 25px var(--box-shadow-color); }
 .property-img { height: 200px; background-size: cover; background-position: center; background-repeat: no-repeat; }

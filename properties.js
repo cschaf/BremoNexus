@@ -34,5 +34,43 @@ const propertyData = [
       { icon: 'fas fa-door-open', text: '6 Räume' },
       { icon: 'fas fa-calendar', text: 'Bj. 2015' }
     ]
+  },
+  {
+    id: 4,
+    image: 'images/placeholder_property_1.png',
+    name: 'Gemütliches Studio-Apartment in Neustadt',
+    price: '180.000 €',
+    description: 'Perfekt für Singles oder Paare: Dieses charmante Studio-Apartment bietet modernen Komfort auf kleinem Raum...',
+    features: [
+      { icon: 'fas fa-ruler-combined', text: '40 m²' },
+      { icon: 'fas fa-bed', text: '1 Zimmer' },
+      { icon: 'fas fa-calendar', text: 'Bj. 2018' }
+    ]
+  },
+  {
+    id: 5,
+    image: 'images/placeholder_property_2.png',
+    name: 'Großzügiges Loft mit Industriecharme in Überseestadt',
+    price: '450.000 €',
+    description: 'Einzigartiges Loft mit hohen Decken und großen Fensterflächen in der dynamischen Überseestadt...',
+    features: [
+      { icon: 'fas fa-ruler-combined', text: '120 m²' },
+      { icon: 'fas fa-bed', text: '2 Zimmer' },
+      { icon: 'fas fa-bath', text: '2 Bäder' },
+      { icon: 'fas fa-calendar', text: 'Bj. 2005 (saniert)' }
+    ]
+  },
+  {
+    id: 6,
+    image: 'images/placeholder_property_3.png',
+    name: 'Büroetage mit Weitblick im Technologiepark',
+    price: '15 €/m² zzgl. NK',
+    description: 'Helle und moderne Büroetage in einem repräsentativen Gebäude im Technologiepark, ideal für innovative Unternehmen...',
+    features: [
+      { icon: 'fas fa-ruler-combined', text: '350 m²' },
+      { icon: 'fas fa-door-open', text: '10 Räume' },
+      { icon: 'fas fa-elevator', text: 'Aufzug vorhanden' },
+      { icon: 'fas fa-parking', text: 'Tiefgarage' }
+    ]
   }
 ];
