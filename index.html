@@ -98,7 +98,11 @@
         .service-item:hover { transform: translateY(-10px); box-shadow: 0 8px 25px var(--box-shadow-color); opacity: 0.9; }
         .service-item i.fa-2x { display: block; color: var(--primary-color); margin-bottom: 15px; text-align: center; }
         .service-item h3 { margin-bottom: 10px; font-size: 1.3em; }
-        .service-item p { font-size: 0.95em; color: var(--text-color); opacity: 0.85; }
+        .service-item p { font-size: 0.95em; color: var(--text-color); opacity: 0.85; margin-bottom: 0; } /* Set margin-bottom to 0 for p to let button control spacing */
+        .service-item .btn.service-cta-btn { 
+            margin-top: 15px; 
+            display: inline-block; 
+        }
         
         .properties { background-color: var(--light-color); transition: background-color 0.3s;}
         .properties-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
@@ -183,6 +187,39 @@
             font-size: 24px; 
         }
 
+        /* Education Badge Styles */
+        .education-badge {
+            position: fixed;
+            top: 15px; 
+            right: 15px; 
+            background-color: #f0ad4e; 
+            color: #fff;
+            padding: 5px 8px 5px 10px; /* Fine-tuned padding */
+            font-size: 10px;
+            border-radius: 3px;
+            z-index: 2000; 
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+        }
+
+        .close-education-badge {
+            background: none;
+            border: none;
+            color: inherit; 
+            font-size: 14px; 
+            font-weight: bold;
+            cursor: pointer;
+            padding: 0 5px 0 5px; /* Fine-tuned padding */
+            line-height: 1; 
+            margin-left: 5px; /* Fine-tuned margin */
+        }
+
+        .close-education-badge:hover {
+            opacity: 0.7; 
+        }
+
         /* Media Queries */
         @media (max-width: 992px) { 
             .about-content { flex-direction: column; align-items: center; text-align: center; }
@@ -209,9 +246,55 @@
                 box-shadow: 0 2px 5px var(--box-shadow-color); 
             }
             nav ul.active { display: flex; } 
-            nav ul li { margin: 10px 15px; width: 100%; text-align: center; margin-left: 0;} 
-            .dark-mode-toggle { margin-left: 0; margin-top:10px;} 
+            nav ul li { margin: 0; width: 100%; text-align: center; margin-left: 0;} /* Removed margin, will be handled by padding on <a> */
+            nav ul li a:not(.btn-nav-cta) { display: block; padding: 12px 15px; } /* Added padding for larger tap area, excluding new CTA buttons */
+            /* Ensure dark mode toggle is also centered and has some margin if it's the last item of its kind */
+            nav ul li:has(> .dark-mode-toggle) {
+                 margin-top: 10px; /* Add some top margin to the <li> containing the dark mode toggle */
+            }
+            .dark-mode-toggle { 
+                display: inline-block; /* Keep it inline-block to center it if text-align:center is on parent li */
+                padding: 8px 12px; /* Existing padding */
+                font-size: 1.2em; /* Existing font-size */
+            } 
 
+            /* Mobile Nav CTA Buttons */
+            .mobile-nav-cta { /* Styling for the <li> elements containing CTA buttons */
+                margin: 10px 15px; /* Add some margin around the CTA list items */
+                padding: 0; /* Reset padding if any from general li rules */
+            }
+            .btn-nav-cta { /* Styling for the <a> tags as buttons */
+                display: inline-block; 
+                padding: 10px 20px; /* Match general .btn padding */
+                width: auto;
+                max-width: 220px; /* Allow them to be reasonably wide */
+                text-decoration: none;
+                border-radius: 4px; /* Match .btn */
+                background-color: var(--secondary-color); /* Use secondary color to differentiate from normal .btn */
+                color: white; /* Text color for secondary button */
+                border: 1px solid var(--secondary-color); 
+                font-size: 0.95em; /* Match general .btn font-size */
+                line-height: 1.5; /* Standard line height */
+                transition: background-color 0.3s, border-color 0.3s;
+            }
+            .btn-nav-cta:hover {
+                background-color: var(--primary-color); /* Darken on hover or use accent */
+                border-color: var(--primary-color);
+                color: white; 
+            }
+            body.dark-mode .btn-nav-cta {
+                 background-color: var(--secondary-color);
+                 color: var(--background-color); /* Text color for dark mode */
+                 border-color: var(--secondary-color);
+            }
+             body.dark-mode .btn-nav-cta:hover {
+                 background-color: var(--primary-color);
+                 color: var(--background-color); /* Text color for dark mode hover */
+            }
+            .btn-nav-cta i {
+                margin-right: 8px;
+            }
+            
             .menu-toggle { 
                 display: block; 
                 position: absolute; 
@@ -226,21 +309,149 @@
             .footer-sub .container.sub-footer-top { flex-direction: column; gap: 10px; }
             .footer-sub-links { text-align: center; width: 100%; }
             .footer-sub-links a { margin: 0 8px; }
+
+            /* General adjustments for 768px */
+            h2 { font-size: 28px; } /* Slightly reduce h2 font size */
+            section { padding: 40px 0; } /* Reduce section padding */
+            .btn { padding: 10px 16px; font-size: 0.95em; } /* Adjust button padding for better tap area */
+
+            /* Footer Section for 768px */
+            .footer-column { margin-bottom: 15px; } /* Reduce margin for footer columns */
+            .footer-column h4 { font-size: 1.05em; } /* Adjust footer column header font size */
+            .footer-sub-links a { padding: 5px 8px; } /* Added padding for better tap area */
+            .accordion-toggle { padding: 12px 15px; } /* Ensure accordion padding */
         }
         @media (max-width: 480px) { 
-             .about-text-content h2 { font-size: 28px; } 
-             .hero h1 { font-size: 32px; }
-             .hero p { font-size: 18px; }
+            .education-badge { /* Adjust badge for very small screens */
+                top: 75px; /* Increased from 10px to clear the header */
+                left: 10px; 
+                font-size: 9px;
+                padding: 4px 8px;
+            }
+             .about-text-content h2 { font-size: 24px; } 
+             .hero h1 { font-size: 28px; }
+             .hero p { font-size: 18px; line-height: 1.5; }
+             .hero-content { padding: 0 10px; } /* Added padding for hero content */
              .values-list { grid-template-columns: 1fr; }
-             .value-item { gap: 12px; }
+             .value-item { gap: 12px; padding: 10px 0; } /* Added padding to value-item */
              .dark-mode-toggle { padding: 6px 10px; font-size: 1em;}
+             p { line-height: 1.5; } /* General paragraph line-height for mobile */
+
+             /* Services Section */
+             .service-item { padding: 20px; }
+             .service-item h3 { font-size: 1.2em; }
+
+             /* Properties Section */
+             .property-content { padding: 15px; }
+             .property-features { font-size: 0.85em; gap: 10px; }
+
+             /* Contact Section */
+             .contact-form .form-group { margin-bottom: 15px; }
+             .contact-info-item { margin-bottom: 15px; }
+
+            /* Footer Section for 480px */
+            .footer-column p, .footer-column ul li span { font-size: 0.85em; }
+            .copyright-text { font-size: 0.8em; }
+            .footer-sub-links a { margin: 0 5px; font-size: 0.8em; padding: 5px; } /* Added padding for better tap area */
         }
         html { scroll-behavior: smooth; }
+
+        body.cta-bar-is-active .site-footer .accordion-wrapper {
+            padding-bottom: 110px; /* Generous padding for stacked buttons on small screens */
+        }
+
+        /* Floating CTA Bar Styles */
+        .mobile-cta-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px;
+            display: flex; /* Initially flex, but hidden by default via no 'visible' class */
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1001;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+            display: none; /* Hidden by default, JS will add .visible */
+        }
+
+        .mobile-cta-bar.visible {
+            display: flex;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-grow: 1;
+            margin-left: 30px; /* Space for the close button */
+        }
+
+        .cta-btn {
+            color: white;
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            border: 1px solid white;
+            display: flex;
+            align-items: center;
+            gap: 8px; /* Increased gap for icon and text */
+            font-size: 0.9em;
+        }
+        .cta-btn i {
+            font-size: 1.1em; /* Slightly larger icons */
+        }
+
+        .close-cta-bar {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 28px; /* Larger for easier tap */
+            cursor: pointer;
+            padding: 0 15px; /* Larger tap area */
+            position: absolute; /* Position it to the far right */
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
         
+        @media (max-width: 767px) {
+            /* .mobile-cta-bar is already display:none by default */
+            /* .visible class will be added by JS to show it */
+            /* No specific style needed here other than what .visible provides */
+        }
+        /* Make CTA buttons stack on very small screens if needed */
+        @media (max-width: 360px) {
+            .cta-buttons {
+                flex-direction: column;
+                align-items: stretch; /* Make buttons full width in column */
+            }
+            .cta-btn {
+                justify-content: center; /* Center text and icon */
+                padding: 10px 12px; /* Adjust padding for stacked buttons */
+            }
+            .mobile-cta-bar {
+                padding-bottom: 15px; /* Add more padding if buttons stack */
+            }
+             .cta-buttons {
+                margin-left: 0; /* Remove margin when close button might be less of an issue or handled differently */
+            }
+            .close-cta-bar {
+                top: 15px; /* Adjust position if bar height changes */
+                transform: translateY(0); 
+            }
+        }
+
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <div class="education-badge" id="educationBadge">
+        <span>Educational Purpose Only</span>
+        <button class="close-education-badge" id="closeEducationBadge" aria-label="Close_Badge">&times;</button>
+    </div>
     <header>
          <div class="container">
             <nav>
@@ -251,6 +462,16 @@
                     <li><a href="#services">Leistungen</a></li>
                     <li><a href="#properties">Immobilien</a></li>
                     <li><a href="#contact">Kontakt</a></li>
+                    <li class="mobile-nav-cta">
+                        <a href="tel:+4942112345678" class="btn-nav-cta btn-nav-call">
+                            <i class="fas fa-phone-alt"></i> Anrufen
+                        </a>
+                    </li>
+                    <li class="mobile-nav-cta">
+                        <a href="mailto:info@bremonexus-immobilien.de" class="btn-nav-cta btn-nav-email">
+                            <i class="fas fa-envelope"></i> E-Mail
+                        </a>
+                    </li>
                     <li>
                         <button id="darkModeToggle" class="dark-mode-toggle" aria-label="Dark Mode umschalten">
                             <i class="fas fa-moon"></i>
@@ -328,31 +549,37 @@
                     <i class="fas fa-home fa-2x"></i>
                     <h3>Immobilienverkauf</h3>
                     <p>Professionelle Vermarktung Ihrer Immobilie mit einer individuellen Strategie und einem transparenten Prozess. Von der fundierten Wertermittlung über die Erstellung hochwertiger Exposés bis zu den Besichtigungen und dem Notartermin – alles aus einer Hand.</p>
+                    <a href="#contact" class="btn service-cta-btn">Anfragen</a>
                 </div>
                 <div class="service-item">
                     <i class="fas fa-key fa-2x"></i>
                     <h3>Immobilienvermietung</h3>
                     <p>Zuverlässige Vermittlung zwischen Vermietern und Mietern. Ich übernehme die Suche nach solventen, passenden Mietern, führe Besichtigungen durch und unterstütze bei der rechtssicheren Vertragsgestaltung.</p>
+                    <a href="#contact" class="btn service-cta-btn">Anfragen</a>
                 </div>
                 <div class="service-item">
                     <i class="fas fa-chart-line fa-2x"></i>
                     <h3>Immobilienbewertung</h3>
                     <p>Fundierte und marktgerechte Wertermittlung Ihrer Immobilie. Durch Nutzung moderner Tools zur Preisermittlung und mein umfassendes Marktverständnis für Bremen und Umgebung erhalten Sie eine realistische Einschätzung.</p>
+                    <a href="#contact" class="btn service-cta-btn">Anfragen</a>
                 </div>
                 <div class="service-item">
                     <i class="fas fa-video fa-2x"></i>
                     <h3>360° Rundgänge & Drohnenaufnahmen</h3>
                     <p>Moderne Präsentationstechniken wie virtuelle 360°-Rundgänge und professionelle Drohnenaufnahmen ermöglichen potenziellen Käufern einen realistischen und umfassenden ersten Eindruck Ihrer Immobilie – jederzeit und von überall.</p>
+                    <a href="#contact" class="btn service-cta-btn">Anfragen</a>
                 </div>
                 <div class="service-item">
                     <i class="fas fa-camera fa-2x"></i>
                     <h3>Professionelle Fotografie & Videografie</h3>
                     <p>Hochwertige Bilder und emotionale Kurzfilme oder Videos präsentieren Ihre Immobilie von ihrer besten Seite. Kreative Vermarktung, die das Interesse potenzieller Käufer weckt und Emotionen anspricht.</p>
+                    <a href="#contact" class="btn service-cta-btn">Anfragen</a>
                 </div>
                 <div class="service-item">
                     <i class="fas fa-couch fa-2x"></i>
                     <h3>Home Staging & After Sales Services</h3>
                     <p>Optimale Präsentation Ihrer Immobilie durch professionelles Home Staging, um den bestmöglichen Verkaufspreis zu erzielen. Auch nach dem Verkauf unterstütze ich Sie gerne mit meinen After Sales Services, z.B. bei der Organisation des Umzugs oder der Vermittlung von Handwerksdienstleistungen.</p>
+                    <a href="#contact" class="btn service-cta-btn">Anfragen</a>
                 </div>
             </div>
         </div>
@@ -483,25 +710,21 @@
                         <a href="javascript:void(0);" class="accordion-toggle" id="impressum-toggle-footer">Impressum</a>
                         <div class="accordion-content" id="impressum-content-footer">
                             <h3>Impressum</h3>
-                            <p><strong>Angaben gemäß § 5 TMG:</strong> BremoNexus Immobilien, Inhaber: Peter Lustig, [Musterstraße 123], [28195 Bremen] <strong style="color:red;"><-- ADRESSE ERSETZEN!</strong></p>
-                            <h4>Kontakt:</h4> <p>Tel: [+49042112345678], E-Mail: [info@bremonexus-immobilien.de] <strong style="color:red;"><-- DATEN ERSETZEN!</strong></p>
-                            <p><em>... Vollständiger Impressumstext ...</em></p>
+                            <p>Coming Soon...</p>
                         </div>
                     </div>
                     <div class="accordion-item">
                          <a href="javascript:void(0);" class="accordion-toggle" id="datenschutz-toggle-footer">Datenschutzerklärung</a>
                         <div class="accordion-content" id="datenschutz-content-footer">
                             <h3>Datenschutzerklärung</h3>
-                            <p>Stand: [Datum] <strong style="color:red;"><-- AKTUALISIEREN!</strong></p>
-                            <p><em>... Vollständiger Datenschutztext ...</em></p>
+                            <p>Coming Soon...</p>
                         </div>
                     </div>
                      <div class="accordion-item">
-                        <a href="javascript:void(0);" class="accordion-toggle" id="agb-toggle-footer">AGB (Muster)</a>
+                        <a href="javascript:void(0);" class="accordion-toggle" id="agb-toggle-footer">AGB</a>
                         <div class="accordion-content" id="agb-content-footer">
-                            <h3>Allgemeine Geschäftsbedingungen (AGB) - MUSTER</h3>
-                            <p><strong style="color:red;">WICHTIGER HINWEIS: ...</strong></p>
-                             <p><em>... Vollständiges AGB-Muster ...</em></p>
+                            <h3>Allgemeine Geschäftsbedingungen (AGB)</h3>
+                            <p>Coming Soon...</p>
                         </div>
                     </div>
                 </div>
@@ -510,6 +733,15 @@
     </footer>
 
     <button id="scrollTopBtn" title="Nach oben scrollen"><i class="fas fa-arrow-up"></i></button>
+
+    <!-- Mobile CTA Bar HTML -->
+    <div class="mobile-cta-bar" id="mobileCtaBar">
+        <div class="cta-buttons">
+            <a href="tel:+4942112345678" class="cta-btn cta-call"><i class="fas fa-phone-alt"></i> Anrufen</a>
+            <a href="mailto:info@bremonexus-immobilien.de" class="cta-btn cta-email"><i class="fas fa-envelope"></i> E-Mail</a>
+        </div>
+        <button class="close-cta-bar" id="closeCtaBar" aria-label="Schließen">&times;</button>
+    </div>
 
     <script>
         // JavaScript-Code wie in der vorherigen korrekten Version
@@ -542,6 +774,11 @@
                     disableDarkMode();
                 } else {
                     enableDarkMode();
+                }
+
+                // Close mobile menu if it's open
+                if (navList && navList.classList.contains('active')) {
+                    navList.classList.remove('active');
                 }
             });
 
@@ -621,7 +858,7 @@
                 
                 if (content.classList.contains('active')) {
                     content.style.paddingTop = "15px"; 
-                    content.style.paddingBottom = "15px";
+                    content.style.paddingBottom = "25px"; // Increased from 15px
                     content.style.maxHeight = content.scrollHeight + "px"; 
                 } else {
                     content.style.maxHeight = null; 
@@ -654,6 +891,66 @@
                     window.toggleAccordion(this.id, contentId);
                 });
             });
+
+            // Mobile CTA Bar Script
+            const ctaBar = document.getElementById('mobileCtaBar');
+            const closeCtaButton = document.getElementById('closeCtaBar');
+            const ctaBarClosedSessionKey = 'ctaBarClosed_BremoNexus'; // Made key more specific
+
+            function showCtaBar() {
+                // Check if screen width is mobile (e.g., less than 768px)
+                // AND if the bar hasn't been closed in the current session
+                if (ctaBar && window.innerWidth < 768 && sessionStorage.getItem(ctaBarClosedSessionKey) !== 'true') {
+                    ctaBar.classList.add('visible');
+                    document.body.classList.add('cta-bar-is-active');
+                } else if (ctaBar) { // Ensure it's hidden if conditions are not met
+                    ctaBar.classList.remove('visible');
+                    document.body.classList.remove('cta-bar-is-active');
+                }
+            }
+
+            function hideCtaBar() {
+                if (ctaBar) {
+                    ctaBar.classList.remove('visible');
+                    document.body.classList.remove('cta-bar-is-active');
+                }
+            }
+
+            // Initial check on page load
+            showCtaBar();
+
+            if (closeCtaButton) {
+                closeCtaButton.addEventListener('click', function() {
+                    hideCtaBar(); // This will also remove the body class
+                    sessionStorage.setItem(ctaBarClosedSessionKey, 'true');
+                });
+            }
+
+            // Optional: Re-check on resize.
+            // Debounce resize function to avoid performance issues
+            let resizeTimeout;
+            window.addEventListener('resize', function() {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(showCtaBar, 250); // Adjust timeout as needed
+            });
+
+            // Education Badge Dismiss Logic
+            const educationBadge = document.getElementById('educationBadge');
+            const closeEducationBadgeButton = document.getElementById('closeEducationBadge');
+            const educationBadgeClosedKey = 'educationBadgeClosed_v1'; // Added a version
+
+            if (educationBadge && closeEducationBadgeButton) {
+                // Check on page load if badge was previously closed
+                if (sessionStorage.getItem(educationBadgeClosedKey) === 'true') {
+                    educationBadge.style.display = 'none';
+                }
+
+                // Event listener for the close button
+                closeEducationBadgeButton.addEventListener('click', function() {
+                    educationBadge.style.display = 'none';
+                    sessionStorage.setItem(educationBadgeClosedKey, 'true');
+                });
+            }
         });
     </script>
 </body>
