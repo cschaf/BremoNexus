@@ -37,7 +37,7 @@ const propertyData = [
   },
   {
     id: 4,
-    image: 'images/placeholder_property_1.png',
+    image: 'images/004_property.png',
     name: 'Gemütliches Studio-Apartment in Neustadt',
     price: '180.000 €',
     description: 'Perfekt für Singles oder Paare: Dieses charmante Studio-Apartment bietet modernen Komfort auf kleinem Raum...',
@@ -49,7 +49,7 @@ const propertyData = [
   },
   {
     id: 5,
-    image: 'images/placeholder_property_2.png',
+    image: 'images/005_property.png',
     name: 'Großzügiges Loft mit Industriecharme in Überseestadt',
     price: '450.000 €',
     description: 'Einzigartiges Loft mit hohen Decken und großen Fensterflächen in der dynamischen Überseestadt...',
@@ -62,7 +62,7 @@ const propertyData = [
   },
   {
     id: 6,
-    image: 'images/placeholder_property_3.png',
+    image: 'images/006_property.png',
     name: 'Büroetage mit Weitblick im Technologiepark',
     price: '15 €/m² zzgl. NK',
     description: 'Helle und moderne Büroetage in einem repräsentativen Gebäude im Technologiepark, ideal für innovative Unternehmen...',
