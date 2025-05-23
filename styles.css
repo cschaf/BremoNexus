@@ -98,7 +98,7 @@ nav ul li a:hover { color: var(--primary-color); }
 }
 
 .properties { background-color: var(--light-color); transition: background-color 0.3s;}
-.properties-list { display: flex; flex-direction: column; gap: 30px; margin-top: 40px; }
+.properties-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
 .property-item { background-color: var(--card-background); border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px var(--box-shadow-color); display: flex; flex-direction: column; transition: box-shadow 0.3s, background-color 0.3s; }
 .property-item:hover { box-shadow: 0 8px 25px var(--box-shadow-color); }
 .property-img { height: 200px; background-size: cover; background-position: center; background-repeat: no-repeat; }
@@ -313,6 +313,23 @@ body.dark-mode #scrollTopBtn { color: var(--background-color); }
     .footer-column h4 { font-size: 1.05em; } /* Adjust footer column header font size */
     .footer-sub-links a { padding: 5px 8px; } /* Added padding for better tap area */
     .accordion-toggle { padding: 12px 15px; } /* Ensure accordion padding */
+
+    /* Properties List Horizontal Scroll for < 768px */
+    .properties-list {
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        white-space: nowrap; /* Helps ensure items stay in a single line */
+        /* grid-template-columns is implicitly overridden by display: flex */
+        /* The existing 'gap' property will work for flex items */
+        padding-bottom: 15px; /* Add some padding for the scrollbar if it appears */
+    }
+    .property-item {
+        flex: 0 0 auto; /* Prevents items from shrinking or growing */
+        width: 80%;    /* Each item takes up 80% of the viewport width */
+        min-width: 280px; /* Minimum width for items */
+        /* display: flex; and flex-direction: column; are inherited and remain appropriate */
+    }
 }
 @media (max-width: 480px) { 
     .education-badge { /* Adjust badge for very small screens */
