@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+<div id="mainPageContent" style="display: none;">
     <div class="education-badge" id="educationBadge">
         <span>Educational Purpose Only</span>
         <button class="close-education-badge" id="closeEducationBadge" aria-label="Close_Badge">&times;</button>
@@ -150,48 +151,7 @@
             <h2>Aktuelle Immobilienangebote</h2>
             <p>Entdecken Sie meine aktuellen Angebote in Bremen und Umgebung. Hier finden Sie eine Auswahl hochwertiger Immobilien für verschiedene Bedürfnisse – ob Eigentumswohnung, Einfamilienhaus oder Gewerbeimmobilie. Jedes Objekt wird mit Sorgfalt ausgewählt und präsentiert.</p>
             <div class="properties-list">
-                <div class="property-item">
-                    <div class="property-img" style="background-image: url('images/001_property.png');"></div>
-                    <div class="property-content">
-                        <h3>Moderne Eigentumswohnung in Findorff</h3>
-                        <div class="property-price">320.000 €</div>
-                        <p>Diese helle und hochwertig renovierte 3-Zimmer-Wohnung befindet sich in einer begehrten Lage in Bremen-Findorff...</p>
-                        <div class="property-features">
-                            <div class="property-feature"><i class="fas fa-ruler-combined"></i> <span>85 m²</span></div>
-                            <div class="property-feature"><i class="fas fa-bed"></i> <span>3 Zimmer</span></div>
-                            <div class="property-feature"><i class="fas fa-calendar"></i> <span>Bj. 2010</span></div>
-                        </div>
-                        <a href="#contact" class="btn">Anfragen</a>
-                    </div>
-                </div>
-                <div class="property-item">
-                    <div class="property-img" style="background-image: url('images/002_property.png');"></div>
-                    <div class="property-content">
-                        <h3>Einfamilienhaus in Oberneuland mit Garten</h3>
-                        <div class="property-price">650.000 €</div>
-                        <p>Ein Traum für Familien: Dieses gepflegte Einfamilienhaus liegt im grünen und ruhigen Stadtteil Oberneuland...</p>
-                        <div class="property-features">
-                            <div class="property-feature"><i class="fas fa-ruler-combined"></i> <span>160 m²</span></div>
-                            <div class="property-feature"><i class="fas fa-bed"></i> <span>5 Zimmer</span></div>
-                            <div class="property-feature"><i class="fas fa-calendar"></i> <span>Bj. 1998</span></div>
-                        </div>
-                        <a href="#contact" class="btn">Anfragen</a>
-                    </div>
-                </div>
-                <div class="property-item">
-                    <div class="property-img" style="background-image: url('images/003_property.png');"></div>
-                    <div class="property-content">
-                        <h3>Repräsentative Bürofläche in der Innenstadt</h3>
-                        <div class="property-price">12 €/m² zzgl. NK</div>
-                        <p>Moderne und flexible Bürofläche in zentraler Bremer Innenstadtlage. Die Auswahl der Räume ist groß...</p>
-                        <div class="property-features">
-                            <div class="property-feature"><i class="fas fa-ruler-combined"></i> <span>200 m²</span></div>
-                            <div class="property-feature"><i class="fas fa-door-open"></i> <span>6 Räume</span></div>
-                            <div class="property-feature"><i class="fas fa-calendar"></i> <span>Bj. 2015</span></div>
-                        </div>
-                        <a href="#contact" class="btn">Anfragen</a>
-                    </div>
-                </div>
+                <!-- Property items will be dynamically injected here by JavaScript -->
             </div>
         </div>
     </section>
@@ -302,7 +262,9 @@
         </div>
         <button class="close-cta-bar" id="closeCtaBar" aria-label="Schließen">&times;</button>
     </div>
+</div> <!-- Closing mainPageContent div -->
 
+    <script src="properties.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

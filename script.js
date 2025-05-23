@@ -1,5 +1,15 @@
+// Login check
+if (sessionStorage.getItem('isLoggedIn') !== 'true') {
+    window.location.href = 'login.html';
+}
+
 // JavaScript-Code wie in der vorherigen korrekten Version
 document.addEventListener('DOMContentLoaded', function() {
+    const mainContent = document.getElementById('mainPageContent');
+    if (mainContent) {
+        mainContent.style.display = 'block';
+    }
+
     const body = document.body;
     const darkModeToggle = document.getElementById('darkModeToggle');
     const toggleIcon = darkModeToggle.querySelector('i');
@@ -205,4 +215,88 @@ document.addEventListener('DOMContentLoaded', function() {
             sessionStorage.setItem(educationBadgeClosedKey, 'true');
         });
     }
+
+    // Function to display properties
+    function displayProperties() {
+        if (typeof propertyData === 'undefined' || !Array.isArray(propertyData)) {
+            console.error('Error: propertyData is not defined or not an array.');
+            return;
+        }
+
+        const propertiesListContainer = document.querySelector('.properties-list');
+        if (!propertiesListContainer) {
+            console.error('Error: Could not find the ".properties-list" container.');
+            return;
+        }
+
+        propertiesListContainer.innerHTML = ''; // Clear existing content
+
+        propertyData.forEach(property => {
+            // Create property-item div
+            const propertyItem = document.createElement('div');
+            propertyItem.classList.add('property-item');
+
+            // Create property-img div
+            const propertyImg = document.createElement('div');
+            propertyImg.classList.add('property-img');
+            propertyImg.style.backgroundImage = `url('${property.image}')`;
+
+            // Create property-content div
+            const propertyContent = document.createElement('div');
+            propertyContent.classList.add('property-content');
+
+            // Create and append h3 for name
+            const nameH3 = document.createElement('h3');
+            nameH3.textContent = property.name;
+            propertyContent.appendChild(nameH3);
+
+            // Create and append div for price
+            const priceDiv = document.createElement('div');
+            priceDiv.classList.add('property-price');
+            priceDiv.textContent = property.price;
+            propertyContent.appendChild(priceDiv);
+
+            // Create and append p for description
+            const descriptionP = document.createElement('p');
+            descriptionP.textContent = property.description;
+            propertyContent.appendChild(descriptionP);
+
+            // Create property-features div
+            const propertyFeaturesDiv = document.createElement('div');
+            propertyFeaturesDiv.classList.add('property-features');
+
+            property.features.forEach(feature => {
+                const featureDiv = document.createElement('div');
+                featureDiv.classList.add('property-feature');
+
+                const iconI = document.createElement('i');
+                iconI.className = feature.icon; // Assigns all classes from feature.icon
+
+                const textSpan = document.createElement('span');
+                textSpan.textContent = ` ${feature.text}`; // Add space for separation
+
+                featureDiv.appendChild(iconI);
+                featureDiv.appendChild(textSpan);
+                propertyFeaturesDiv.appendChild(featureDiv);
+            });
+            propertyContent.appendChild(propertyFeaturesDiv);
+
+            // Create and append 'Anfragen' button
+            const anfragenBtn = document.createElement('a');
+            anfragenBtn.classList.add('btn');
+            anfragenBtn.href = '#contact';
+            anfragenBtn.textContent = 'Anfragen';
+            propertyContent.appendChild(anfragenBtn);
+
+            // Append property-img and property-content to property-item
+            propertyItem.appendChild(propertyImg);
+            propertyItem.appendChild(propertyContent);
+
+            // Append property-item to the main container
+            propertiesListContainer.appendChild(propertyItem);
+        });
+    }
+
+    // Call displayProperties to render the listings
+    displayProperties(); 
 });
