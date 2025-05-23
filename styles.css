@@ -110,6 +110,16 @@ nav ul li a:hover { color: var(--primary-color); }
 .property-feature { display: flex; align-items: center; gap: 8px; }
 .property-feature i { color: var(--secondary-color); }
 
+/* Prevent text overflow in property items */
+.property-content h3,
+.property-content p,
+.property-feature span {
+    overflow-wrap: break-word; /* Standard property for breaking long words */
+    word-wrap: break-word; /* Older alias for wider compatibility */
+    white-space: normal; /* Ensure text wraps, overriding any potential nowrap setting */
+    /* Consider hyphens: auto; if desired, but it's optional and support can vary */
+}
+
 .contact {}
 .contact-content { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: flex-start;}
 .contact-info { margin-bottom: 30px; }
