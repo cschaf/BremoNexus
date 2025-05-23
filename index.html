@@ -323,8 +323,8 @@
         }
         @media (max-width: 480px) { 
             .education-badge { /* Adjust badge for very small screens */
-                top: 10px; /* Increased from 5px */
-                left: 10px; /* Increased from 5px */
+                top: 75px; /* Increased from 10px to clear the header */
+                left: 10px; 
                 font-size: 9px;
                 padding: 4px 8px;
             }
@@ -774,6 +774,11 @@
                     disableDarkMode();
                 } else {
                     enableDarkMode();
+                }
+
+                // Close mobile menu if it's open
+                if (navList && navList.classList.contains('active')) {
+                    navList.classList.remove('active');
                 }
             });
 
