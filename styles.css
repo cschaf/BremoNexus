@@ -104,6 +104,10 @@ nav ul li a:hover { color: var(--primary-color); }
 .property-img { height: 200px; background-size: cover; background-position: center; background-repeat: no-repeat; }
 .property-content { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
 .property-content h3 { font-size: 1.2em; margin-bottom: 10px;}
+.property-content p {
+    flex-grow: 1; /* Allows the description to take up available vertical space */
+    /* Existing margin-bottom on p might need adjustment if it causes issues with flex layout, but test default first */
+}
 .property-content > .btn { margin-top: auto; align-self: flex-start; }
 .property-price { color: var(--primary-color); font-weight: bold; font-size: 1.25em; margin-bottom: 10px; }
 .property-features { display: flex; flex-wrap: wrap; gap: 15px; margin: 15px 0; font-size: 0.9em; color: var(--text-color); opacity: 0.8; }
