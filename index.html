@@ -187,6 +187,21 @@
             font-size: 24px; 
         }
 
+        /* Education Badge Styles */
+        .education-badge {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: #f0ad4e; /* Warning-like color */
+            color: #fff;
+            padding: 5px 10px;
+            font-size: 10px;
+            border-radius: 3px;
+            z-index: 2000; /* High z-index */
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+
         /* Media Queries */
         @media (max-width: 992px) { 
             .about-content { flex-direction: column; align-items: center; text-align: center; }
@@ -289,6 +304,12 @@
             .accordion-toggle { padding: 12px 15px; } /* Ensure accordion padding */
         }
         @media (max-width: 480px) { 
+            .education-badge { /* Adjust badge for very small screens */
+                top: 5px;
+                right: 5px;
+                font-size: 9px;
+                padding: 4px 8px;
+            }
              .about-text-content h2 { font-size: 24px; } 
              .hero h1 { font-size: 28px; }
              .hero p { font-size: 18px; line-height: 1.5; }
@@ -405,6 +426,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <div class="education-badge">Educational Purpose Only</div>
     <header>
          <div class="container">
             <nav>
@@ -663,25 +685,21 @@
                         <a href="javascript:void(0);" class="accordion-toggle" id="impressum-toggle-footer">Impressum</a>
                         <div class="accordion-content" id="impressum-content-footer">
                             <h3>Impressum</h3>
-                            <p><strong>Angaben gemäß § 5 TMG:</strong> BremoNexus Immobilien, Inhaber: Peter Lustig, [Musterstraße 123], [28195 Bremen] <strong style="color:red;"><-- ADRESSE ERSETZEN!</strong></p>
-                            <h4>Kontakt:</h4> <p>Tel: [+49042112345678], E-Mail: [info@bremonexus-immobilien.de] <strong style="color:red;"><-- DATEN ERSETZEN!</strong></p>
-                            <p><em>... Vollständiger Impressumstext ...</em></p>
+                            <p>Coming Soon...</p>
                         </div>
                     </div>
                     <div class="accordion-item">
                          <a href="javascript:void(0);" class="accordion-toggle" id="datenschutz-toggle-footer">Datenschutzerklärung</a>
                         <div class="accordion-content" id="datenschutz-content-footer">
                             <h3>Datenschutzerklärung</h3>
-                            <p>Stand: [Datum] <strong style="color:red;"><-- AKTUALISIEREN!</strong></p>
-                            <p><em>... Vollständiger Datenschutztext ...</em></p>
+                            <p>Coming Soon...</p>
                         </div>
                     </div>
                      <div class="accordion-item">
                         <a href="javascript:void(0);" class="accordion-toggle" id="agb-toggle-footer">AGB (Muster)</a>
                         <div class="accordion-content" id="agb-content-footer">
                             <h3>Allgemeine Geschäftsbedingungen (AGB) - MUSTER</h3>
-                            <p><strong style="color:red;">WICHTIGER HINWEIS: ...</strong></p>
-                             <p><em>... Vollständiges AGB-Muster ...</em></p>
+                            <p>Coming Soon...</p>
                         </div>
                     </div>
                 </div>
