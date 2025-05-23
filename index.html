@@ -306,7 +306,7 @@
         @media (max-width: 480px) { 
             .education-badge { /* Adjust badge for very small screens */
                 top: 5px;
-                right: 5px;
+                left: 5px; /* Changed from right to left */
                 font-size: 9px;
                 padding: 4px 8px;
             }
@@ -337,6 +337,10 @@
             .footer-sub-links a { margin: 0 5px; font-size: 0.8em; padding: 5px; } /* Added padding for better tap area */
         }
         html { scroll-behavior: smooth; }
+
+        body.cta-bar-is-active .site-footer .accordion-wrapper {
+            padding-bottom: 110px; /* Generous padding for stacked buttons on small screens */
+        }
 
         /* Floating CTA Bar Styles */
         .mobile-cta-bar {
@@ -696,9 +700,9 @@
                         </div>
                     </div>
                      <div class="accordion-item">
-                        <a href="javascript:void(0);" class="accordion-toggle" id="agb-toggle-footer">AGB (Muster)</a>
+                        <a href="javascript:void(0);" class="accordion-toggle" id="agb-toggle-footer">AGB</a>
                         <div class="accordion-content" id="agb-content-footer">
-                            <h3>Allgemeine Geschäftsbedingungen (AGB) - MUSTER</h3>
+                            <h3>Allgemeine Geschäftsbedingungen (AGB)</h3>
                             <p>Coming Soon...</p>
                         </div>
                     </div>
@@ -872,14 +876,17 @@
                 // AND if the bar hasn't been closed in the current session
                 if (ctaBar && window.innerWidth < 768 && sessionStorage.getItem(ctaBarClosedSessionKey) !== 'true') {
                     ctaBar.classList.add('visible');
+                    document.body.classList.add('cta-bar-is-active');
                 } else if (ctaBar) { // Ensure it's hidden if conditions are not met
                     ctaBar.classList.remove('visible');
+                    document.body.classList.remove('cta-bar-is-active');
                 }
             }
 
             function hideCtaBar() {
                 if (ctaBar) {
                     ctaBar.classList.remove('visible');
+                    document.body.classList.remove('cta-bar-is-active');
                 }
             }
 
@@ -888,7 +895,7 @@
 
             if (closeCtaButton) {
                 closeCtaButton.addEventListener('click', function() {
-                    hideCtaBar();
+                    hideCtaBar(); // This will also remove the body class
                     sessionStorage.setItem(ctaBarClosedSessionKey, 'true');
                 });
             }
